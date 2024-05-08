@@ -13,7 +13,7 @@ pipeline {
                 script {
                     def logFileContent = sh(script: 'sudo cat /var/log/apache2/access.log', returnStdout: true).trim()
                     def errorLines = logFileContent.readLines().findAll { line ->
-                        line =~ /(?:4\d{2}|5\d{2})/
+                        line =~ /\s(?:4\d{2}|5\d{2})\s/
                     }
                     if (errorLines) {
                         echo "Found errors in Apache2 access log:"
